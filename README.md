@@ -1,2 +1,2 @@
 # RETN-Token
-RETN Token on Live Network
+RETN Token Contract
