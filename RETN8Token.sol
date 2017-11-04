@@ -1,4 +1,4 @@
-//RETN8
+//RETN Token
 pragma solidity ^0.4.16;
 
 contract owned {
@@ -21,21 +21,16 @@ contract owned {
 interface tokenRecipient { function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData) public; }
 
 contract TokenERC20 {
-    // Public variables of the token
     string public name;
     string public symbol;
     uint8 public decimals = 18;
-    // 18 decimals is the strongly suggested default, avoid changing it
     uint256 public totalSupply;
 
-    // This creates an array with all balances
     mapping (address => uint256) public balanceOf;
     mapping (address => mapping (address => uint256)) public allowance;
 
-    // This generates a public event on the blockchain that will notify clients
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    // This notifies clients about the amount burnt
     event Burn(address indexed from, uint256 value);
 
     /**
@@ -48,10 +43,10 @@ contract TokenERC20 {
         string tokenName,
         string tokenSymbol
     ) public {
-        totalSupply = initialSupply * 10 ** uint256(decimals);  // Update total supply with the decimal amount
-        balanceOf[msg.sender] = totalSupply;                // Give the creator all initial tokens
-        name = tokenName;                                   // Set the name for display purposes
-        symbol = tokenSymbol;                               // Set the symbol for display purposes
+        totalSupply = initialSupply * 10 ** uint256(decimals);
+        balanceOf[msg.sender] = totalSupply;
+        name = tokenName;
+        symbol = tokenSymbol;
     }
 
     /**
@@ -170,11 +165,7 @@ contract TokenERC20 {
     }
 }
 
-/******************************************/
-/*       Retn8 Token STARTS HERE          */
-/******************************************/
-
-contract RETN8 is owned, TokenERC20 {
+contract RETNToken is owned, TokenERC20 {
 
     mapping (address => bool) public frozenAccount;
 
@@ -182,7 +173,7 @@ contract RETN8 is owned, TokenERC20 {
     event FrozenFunds(address target, bool frozen);
 
     /* Initializes contract with initial supply tokens to the creator of the contract */
-    function RETN8(
+    function RETNToken(
         uint256 initialSupply,
         string tokenName,
         string tokenSymbol
